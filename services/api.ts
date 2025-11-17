@@ -54,18 +54,18 @@ export const fetchMovieDetails = async (movieId: string) => {
 };
 
 // TESTING
-(async () => {
-  try {
-    console.log("Fetching movies...");
-    const movies = await fetchMovies({ query: "avengers" });
-    console.log("Movies:", movies);
+// (async () => {
+//   try {
+//     console.log("Fetching movies...");
+//     const movies = await fetchMovies({ query: "avengers" });
+//     console.log("Movies:", movies);
 
-    if (movies.length > 0) {
-      console.log("\nFetching details for:", movies[0].id);
-      const details = await fetchMovieDetails(String(movies[0].id));
-      console.log("Movie Details:", details);
-    }
-  } catch (err) {
-    console.error("❌ ERROR:", err);
-  }
-})();
+//     if (movies.length > 0) {
+//       console.log("\nFetching details for:", movies[0].id);
+//       const details = await fetchMovieDetails(String(movies[0].id));
+//       console.log("Movie Details:", details);
+//     }
+//   } catch (err) {
+//     console.error("❌ ERROR:", err);
+//   }
+// })();
