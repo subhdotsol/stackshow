@@ -5,17 +5,18 @@ import { icons } from '@/constants/icons'
 import { images } from '@/constants/images'
 import { fetchMovies } from '@/services/api'
 import useFetch from '@/services/useFetch'
-import React from 'react'
+import React, { useState } from 'react'
 import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native'
 
 const Search = () => {
 
+  let [searchQuery, setSearchQuery] = useState(''); 
 
   const {
     data: movies,
     loading,
     error
-  } = useFetch(() => fetchMovies({ query: "" }));
+  } = useFetch(() => fetchMovies({ query: searchQuery }));
 
   return (
     <View className="flex-1 bg-primary">
@@ -44,7 +45,11 @@ const Search = () => {
               </View>
 
               <View className='my-5'>
-                <SearchBar placeholder='Search Movies' />
+                <SearchBar 
+                placeholder='Search Movies'
+                value={searchQuery}
+                onChangeText={(text : string)=>setSearchQuery(text)}
+                />
               </View>
 
               {
@@ -60,10 +65,10 @@ const Search = () => {
               }
 
               {
-                !loading && !error && 'SEARCH TERM'.trim() && movies?.length > 0 && (
+                !loading && !error && searchQuery.trim() && movies?.length > 0 && (
                   <Text className='text-xl text-white font-bold'>
-                    Search Results for {' '}
-                    <Text className='text-darkAccent'>SEARCH TERM</Text>
+                    Search Results for : {' '}
+                    <Text className='text-darkAccent'>{searchQuery}</Text>
                   </Text>
                 )
               }
